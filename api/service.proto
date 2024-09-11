@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package sample;
+
+import "google/api/annotations.proto";
+option go_package="otus/transcodding";
+
+service SampleRPC {
+  rpc SaveItem(SaveItemReq) returns (SaveItemRes) {
+    option (google.api.http) = {
+      post: "/item/{item_id}"
+      body: "*"
+    };
+  }
+
+  rpc GetItem(GetItemReq) returns (GetItemRes) {
+    option (google.api.http) = {
+      get: "/item/{item_id}"
+    };
+  }
+
+  rpc UpdateItem(UpdateItemReq) returns (UpdateItemRes) {
+    option (google.api.http) = {
+      patch: "/item/{item_id}"
+    };
+  }
+
+  rpc DeleteItem(DeleteItemReq) returns (DeleteItemRes) {
+    option (google.api.http) = {
+      delete: "/item/{item_id}"
+    };
+  }
+}
+
+message Item {
+  uint32 item_id = 1;
+  string message = 2;
+  string title = 3;
+  string author = 4;
+}
+
+message SaveItemReq {
+  uint32 item_id = 1;
+  string message = 2;
+  string title = 3;
+  string author = 4;
+}
+
+message SaveItemRes {
+  bool success = 1;
+  string message = 3;
+}
+
+message GetItemReq {
+  uint32 item_id = 1;
+}
+
+message GetItemRes {
+  Item item = 1;
+}
+
+message UpdateItemReq {
+  uint32 item_id = 1;
+  string message = 2;
+  string title = 3;
+}
+
+message UpdateItemRes {
+  bool status = 1;
+  Item item = 2;
+}
+
+message DeleteItemReq {
+  uint32 item_id = 1;
+}
+
+message DeleteItemRes {
+  bool status = 1;
+}

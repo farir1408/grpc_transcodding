@@ -1,0 +1,24 @@
+version: v1
+plugins:
+  - plugin: go
+    path: ./bin/protoc-gen-go
+
+    out: pkg/pb
+    opt: paths=source_relative
+  - plugin: go-grpc
+    path: ./bin/protoc-gen-go-grpc
+
+    out: pkg/pb
+    opt: paths=source_relative
+
+  - plugin: grpc-gateway
+
+    path: ./bin/protoc-gen-grpc-gateway
+
+    out: pkg/pb
+    opt: paths=source_relative
+
+  - plugin: openapiv2
+    path: ./bin/protoc-gen-openapiv2
+
+    out: api/openapiv2
